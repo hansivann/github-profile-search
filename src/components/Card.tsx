@@ -9,8 +9,24 @@ export default function Card() {
   return (
     <>
       <div className="flex flex-col items-center justify-center mt-6">Card goes here
-        <div>Picture here
+        <div className="flex flex-col items-center justify-center">Picture here
           <div>username</div>
+          <div className="links">
+            <ul className="flex w-max justify-between space-x-6 items-center">
+              <li>followers</li>
+              <li>following</li>
+              <li># repos</li>
+            </ul>
+          <div className="top-repos">
+            <ul className="flex w-max space-x-8 justify-between">
+              <li>repo 1</li>
+              <li>repo 2</li>
+              <li>repo 3</li>
+              <li>repo 4</li>
+              <li>repo 5</li>
+            </ul>
+          </div>
+          </div>
         </div>
       </div>
     </>
