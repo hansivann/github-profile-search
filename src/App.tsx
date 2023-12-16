@@ -3,6 +3,10 @@ import Search from "./components/Search"
 
 
 // TO-DO: 
+// make repos into links
+// make search work
+//hide api
+// fix styling - responsive 
 
 function App() {
 
