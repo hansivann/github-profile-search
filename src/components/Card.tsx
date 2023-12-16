@@ -12,7 +12,7 @@ export default function Card() {
         <div className="flex flex-col items-center justify-center">Picture here
           <div>username</div>
           <div className="links">
-            <ul className="flex w-max justify-between space-x-6 items-center">
+            <ul className=" flex flex-row w-max justify-center space-x-6">
               <li>followers</li>
               <li>following</li>
               <li># repos</li>
