@@ -23,10 +23,12 @@ export default function Card() {
     <>
       { userData &&
         <div className="flex flex-col items-center justify-center mt-6">
+          <img src= {userData.avatar_url} alt={userData.login}
+          className=" h-32 rounded-full object-cover"
+          ></img> 
+          <div className=" pt-2">{userData.login}</div>
         <div className="flex flex-col items-center justify-center">
-          <div className="">{userData.avatar_url}</div>
-          <div >{userData.login}</div>
-          <div className="links">
+          <div className="pt-5">
             <ul className=" flex flex-row w-max justify-center space-x-6">
               <li>{userData.followers} followers</li>
               <li>{userData.following} following</li>
