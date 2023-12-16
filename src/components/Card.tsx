@@ -7,22 +7,40 @@
 //  need
 // user_url, followers_url, following_url, user_repositories_url, user_repositories_url
 
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import {getSource} from '../api/script.js'
+
+function RepoList({ repos }) {
+  return (
+    <ul className="flex w-max space-x-8 justify-between">
+      {repos.map((repo, index) => (
+        <li key={index}>{repo.name}</li>
+      ))}
+    </ul>
+  );
+}
 
 export default function Card() {
   const [userData, setUserData] = useState(null);
-
-  console.log(userData)
+  const [userRepos, setUserRepos] = useState([])
 
   useEffect(() => {
-      getSource('bradtraversy').then(data => setUserData(data))
-  }, [])
+    const username = 'bradtraversy'; // replace with the actual username
+    fetch(`https://api.github.com/users/${username}`)
+      .then(response => response.json())
+      .then(data => setUserData(data));
+
+    fetch(`https://api.github.com/users/${username}/repos`)
+      .then(response => response.json())
+      .then(data => setUserRepos(data));
+  }, []);
+
+  console.log(userData)
 
   return (
     <>
       { userData &&
-        <div className="flex flex-col items-center justify-center mt-6">
+        <div className=" container flex flex-col items-center justify-center mt-6">
           <img src= {userData.avatar_url} alt={userData.login}
           className=" h-32 rounded-full object-cover"
           ></img> 
@@ -36,9 +54,7 @@ export default function Card() {
             </ul>
           <div className="top-repos">
             <ul className="flex w-max space-x-8 justify-between">
-              <li>repo 1</li>
-              <li>repo 2</li>
-              <li>repo 3</li>
+              <RepoList repos={userRepos.slice(0,5)} />
             </ul>
           </div>
           </div>
@@ -46,18 +62,6 @@ export default function Card() {
       </div>
       }
 
-{/* {userData && (
-        <div className="flex flex-col items-center justify-center mt-6">
-          <div>{userData.avatar_url}
-            {userData.login}</div>
-          <div className="links">
-            <ul className="flex flex-row w-max justify-center space-x-6">
-              <li>{userData.followers} followers</li>
-              <li>{userData.following} following</li>
-            </ul>
-          </div>
-        </div>
-      )} */}
     </>
   )
 }
