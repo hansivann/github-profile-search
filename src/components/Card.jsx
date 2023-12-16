@@ -8,7 +8,6 @@
 // user_url, followers_url, following_url, user_repositories_url, user_repositories_url
 
 import { SetStateAction, useEffect, useState } from "react";
-import {getSource} from '../api/script.js'
 
 function RepoList({ repos }) {
   return (
