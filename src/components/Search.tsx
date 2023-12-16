@@ -10,7 +10,6 @@ function Search() {
           placeholder="GitHub User"
           className="text-center"
           ></input>
-            <div>Search goes here</div>
       </form>
     </>
   )
