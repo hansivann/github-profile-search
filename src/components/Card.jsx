@@ -1,13 +1,4 @@
-
-//TO-DO:
-// build skeleton for: 
-// image, count for followers, following, # of repos,
-// top 5 repos
-// get github api and render it to card. Hide api source! 
-//  need
-// user_url, followers_url, following_url, user_repositories_url, user_repositories_url
-
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function RepoList({ repos }) {
   return (
@@ -19,7 +10,13 @@ function RepoList({ repos }) {
   );
 }
 
+// TO-DO: 
+// add search here
+// username value is when submit button is clicked
+
+
 export default function Card() {
+  const [username, setUsername] = useState('')
   const [userData, setUserData] = useState(null);
   const [userRepos, setUserRepos] = useState([])
 
@@ -32,9 +29,10 @@ export default function Card() {
     fetch(`https://api.github.com/users/${username}/repos`)
       .then(response => response.json())
       .then(data => setUserRepos(data));
-  }, []);
-
+  }, [username]);
   console.log(userData)
+
+
 
   return (
     <>
