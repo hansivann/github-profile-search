@@ -8,7 +8,11 @@
 export default function Card() {
   return (
     <>
-      <div>Card goes here</div>
+      <div className="flex flex-col items-center justify-center mt-6">Card goes here
+        <div>Picture here
+          <div>username</div>
+        </div>
+      </div>
     </>
   )
 }
