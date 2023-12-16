@@ -2,7 +2,17 @@
 
 function Search() {
   return (
-    <div className=' pb-8'>Search goes here</div>
+    <>
+      <form className='flex flex-col items-center justify-center mt-5 '>
+          <input
+          type="text"
+          id='search'
+          placeholder="GitHub User"
+          className="text-center"
+          ></input>
+            <div>Search goes here</div>
+      </form>
+    </>
   )
 }
 
