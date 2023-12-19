@@ -10,6 +10,21 @@ function RepoList({ repos }) {
   );
 }
 
+function Search() {
+  return(
+    <>
+      <form className='flex flex-col items-center justify-center mt-5 '>
+          <input
+          type="text"
+          id='search'
+          placeholder="GitHub User"
+          className="text-center"
+          ></input>
+      </form>
+    </>
+  )
+}
+
 // TO-DO: 
 // add search here
 // username value is when submit button is clicked
@@ -20,22 +35,24 @@ export default function Card() {
   const [userData, setUserData] = useState(null);
   const [userRepos, setUserRepos] = useState([])
 
-  useEffect(() => {
-    const username = 'bradtraversy'; // replace with the actual username
-    fetch(`https://api.github.com/users/${username}`)
-      .then(response => response.json())
-      .then(data => setUserData(data));
+  // useEffect(() => {
+  //   const username = 'bradtraversy'; // replace with the actual username
+  //   fetch(`https://api.github.com/users/${username}`)
+  //     .then(response => response.json())
+  //     .then(data => setUserData(data));
 
-    fetch(`https://api.github.com/users/${username}/repos`)
-      .then(response => response.json())
-      .then(data => setUserRepos(data));
-  }, [username]);
-  console.log(userData)
+  //   fetch(`https://api.github.com/users/${username}/repos`)
+  //     .then(response => response.json())
+  //     .then(data => setUserRepos(data));
+  // }, [username]);
+  // console.log(userData)
 
 
 
   return (
     <>
+      <Search />
+
       { userData &&
         <div className=" container flex flex-col items-center justify-center mt-6">
           <img src= {userData.avatar_url} alt={userData.login}
