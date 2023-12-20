@@ -1,7 +1,7 @@
 # GitHub Profile Search
 
 ## Project Description
-- This project utilizes GitHub's API to fetch a user's details. The implementation includes robust error-handling functionality to gracefully handle various scenarios.
+- This project utilizes GitHub's API to fetch a user's details. The implementation includes error-handling functionality to gracefully handle various scenarios.
 
 ## Key Features
 - GitHub API Integration: Utilizes GitHub's API to retrieve user details.
