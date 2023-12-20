@@ -31,9 +31,9 @@ function Search() {
     fetch(`https://api.github.com/search/users?q=${query}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        console.log(data.items[0])
         //need: login, avatar_url, followers, following, repos
-        const {login, avatar_url, followers_url, following_url, repos_url} = data;
+        const {login, avatar_url, followers_url, following_url, repos_url} = data.items[0];
 
         console.log(login, avatar_url, followers_url, following_url, repos_url)
       })
@@ -45,7 +45,7 @@ function Search() {
   
   return(
     <>
-      <form 
+      <form
         className='flex flex-col items-center justify-center mt-5 '
         onSubmit={handleSubmit}
       >
@@ -57,6 +57,9 @@ function Search() {
           placeholder="GitHub User"
           className="text-center"
           ></input>
+          <button type='submit'
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >Submit</button>
       </form>
     </>
   )
