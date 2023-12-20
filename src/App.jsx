@@ -10,9 +10,8 @@ function App() {
 
   return (
     <>
-    <div className="max-w-sm rounded overflow-hidden shadow-lg">
-    <Card 
-    />
+    <div className="">
+    <Card />
        
     </div> 
 

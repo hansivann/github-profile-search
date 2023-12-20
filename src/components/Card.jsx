@@ -68,42 +68,51 @@ function Card() {
       })
       .catch(error => {
         console.log(error);
+        setUserData(null);
+        setUsername('');
       });
   }
 
   return (
-    <div>
-      <Search onSubmit={handleSearchSubmit} />
-      {userData && (
-        <div className="container flex flex-col items-center justify-center mt-6">
-          <img
-            src={userData.avatar_url}
-            alt={userData.login}
-            className="h-32 rounded-full object-cover"
-          />
-          <div className="pt-2">{userData.login}</div>
-          <div className="flex flex-col items-center justify-center">
-            <div className="pt-5">
-              <ul className="flex flex-row w-max justify-center space-x-6">
-                <li>{userData.followers} followers</li>
-                <li>{userData.following} following</li>
-                <li>{userData.public_repos} public repos</li>
-              </ul>
-            </div>
-            <div className="top-repos">
-              <ul className="flex w-max space-x-8 justify-between">
-                <RepoList username={username} />
-              </ul>
-            </div>
-          </div>
+    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+      <div className="p-8">
+        <Search onSubmit={handleSearchSubmit} />
+      </div>
+      <div className="md:flex">
+        <div className="md:flex-shrink-0">
+          {userData && (
+            <img
+              src={userData.avatar_url}
+              alt={userData.login}
+              className="h-32 w-32 rounded-full object-cover"
+            />
+          )}
         </div>
-      )}
+        <div className="p-8">
+          {userData && (
+            <div>
+              <div className="text-xl font-medium">{userData.login}</div>
+              <div className="flex flex-col items-center justify-center mt-5">
+                <ul className="flex flex-row w-max justify-center space-x-6">
+                  <li>{userData.followers} followers</li>
+                  <li>{userData.following} following</li>
+                  <li>{userData.public_repos} public repos</li>
+                </ul>
+              </div>
+              <div className="top-repos">
+                <ul className="flex w-max space-x-8 justify-between">
+                  <RepoList username={username} />
+                </ul>
+              </div>
+            </div>
+          )}
+          {!userData && (
+            <p className="text-red-500">User not found</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
 
 export default Card;
-
-
-
-
