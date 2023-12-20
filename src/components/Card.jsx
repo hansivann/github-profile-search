@@ -36,22 +36,35 @@ function Search({ onSubmit }) {
 }
 
 function RepoList({ username }) {
-  const [userRepos, setUserRepos] = useState([]);
+  const [repos, setRepos] = useState([]);
 
   useEffect(() => {
     fetch(`https://api.github.com/users/${username}/repos`)
       .then(response => response.json())
-      .then(data => setUserRepos(data));
+      .then(data => {
+        setRepos(data.slice(0,5));
+      })
+      .catch(error => {
+        console.log(error);
+        setRepos([]);
+      });
   }, [username]);
 
   return (
-    <ul className="flex w-max space-x-8 justify-between">
-      {userRepos.map((repo, index) => (
-        <li key={index}>{repo.name}</li>
+    <>
+      {repos.slice(0, 5).map(repo => (
+        <li key={repo.id} 
+        className=' hover:text-purple-800 p-1 rounded'
+        >
+          <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+            {repo.name}
+          </a>
+        </li>
       ))}
-    </ul>
+    </>
   );
 }
+
 
 function Card() {
   const [userData, setUserData] = useState(null);
@@ -79,7 +92,7 @@ function Card() {
         <Search onSubmit={handleSearchSubmit} />
       </div>
       <div className="md:flex">
-        <div className="md:flex-shrink-0">
+        <div className="p-8">
           {userData && (
             <img
               src={userData.avatar_url}
@@ -92,16 +105,16 @@ function Card() {
           {userData && (
             <div>
               <div className="text-xl font-medium">{userData.login}</div>
-              <div className="flex flex-col items-center justify-center mt-5">
-                <ul className="flex flex-row w-max justify-center space-x-6">
-                  <li>{userData.followers} followers</li>
-                  <li>{userData.following} following</li>
-                  <li>{userData.public_repos} public repos</li>
-                </ul>
+              <div className="flex flex-col">
+              <ul className="flex flex-row w-max space-x-6">
+                <li className="p-2">{userData.followers} followers</li>
+                <li className="p-2">{userData.following} following</li>
+                <li className="p-2">{userData.public_repos} public repos</li>
+              </ul>
               </div>
               <div className="top-repos">
-                <ul className="flex w-max space-x-8 justify-between">
-                  <RepoList username={username} />
+                <ul className=" flex-1 ">
+                  <RepoList username={username} repos={userRepos}/>
                 </ul>
               </div>
             </div>
