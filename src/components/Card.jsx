@@ -1,26 +1,79 @@
 import { useEffect, useState } from "react";
-import Search from "./Search";
 
-function RepoList({ repos }) {
+function Search({ onSubmit }) {
+  const [query, setQuery] = useState('');
+
+  const handleQueryChange = (event) => {
+    setQuery(event.target.value);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(query);
+  }
+  
+  return (
+    <form
+      className='flex flex-col items-center justify-center mt-5'
+      onSubmit={handleSubmit}
+    >
+      <input
+        type="text"
+        value={query} 
+        onChange={handleQueryChange}
+        id='search'
+        placeholder="GitHub User"
+        className="text-center border border-gray-300 rounded py-2 px-4"
+      />
+      <button
+        type='submit'
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+      >
+        Submit
+      </button>
+    </form>
+  );
+}
+
+function RepoList({ username }) {
+  const [userRepos, setUserRepos] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://api.github.com/users/${username}/repos`)
+      .then(response => response.json())
+      .then(data => setUserRepos(data));
+  }, [username]);
+
   return (
     <ul className="flex w-max space-x-8 justify-between">
-      {repos.map((repo, index) => (
+      {userRepos.map((repo, index) => (
         <li key={index}>{repo.name}</li>
       ))}
     </ul>
   );
 }
 
+function Card() {
+  const [userData, setUserData] = useState(null);
+  const [userRepos, setUserRepos] = useState([]);
+  const [username, setUsername] = useState('');
 
-// TO-DO: 
-// add search here
-// username value is when submit button is clicked
+  const handleSearchSubmit = (query) => {
+    fetch(`https://api.github.com/search/users?q=${query}`)
+      .then(response => response.json())
+      .then(data => {
+        const { login, avatar_url, followers, following, public_repos } = data.items[0];
+        setUserData({ login, avatar_url, followers, following, public_repos });
+        setUsername(login);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
-
-function UserProfile({ userData, userRepos }) {
   return (
-    <div className='bg-orange-400'>
-      <Search />
+    <div>
+      <Search onSubmit={handleSearchSubmit} />
       {userData && (
         <div className="container flex flex-col items-center justify-center mt-6">
           <img
@@ -39,7 +92,7 @@ function UserProfile({ userData, userRepos }) {
             </div>
             <div className="top-repos">
               <ul className="flex w-max space-x-8 justify-between">
-                <RepoList repos={userRepos.slice(0, 5)} />
+                <RepoList username={username} />
               </ul>
             </div>
           </div>
@@ -49,5 +102,8 @@ function UserProfile({ userData, userRepos }) {
   );
 }
 
-export default UserProfile;
+export default Card;
+
+
+
 
