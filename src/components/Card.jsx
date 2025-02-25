@@ -11,7 +11,7 @@ function Search({ onSubmit }) {
     event.preventDefault();
     onSubmit(query);
   }
-  
+
   return (
     <form
       className='flex flex-col items-center justify-center mt-5'
@@ -19,7 +19,7 @@ function Search({ onSubmit }) {
     >
       <input
         type="text"
-        value={query} 
+        value={query}
         onChange={handleQueryChange}
         id='search'
         placeholder="GitHub User"
@@ -53,7 +53,7 @@ function RepoList({ username }) {
   return (
     <>
       {repos.slice(0, 5).map(repo => (
-        <li key={repo.id} 
+        <li key={repo.id}
         className=' hover:text-purple-800 p-1 rounded'
         >
           <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
