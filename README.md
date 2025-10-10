@@ -1,15 +1,34 @@
-# GitHub Profile Search
+# 🧑‍💻 GitHub Profile Search
 
-## Project Description
-- This project utilizes GitHub's API to fetch a user's details. The implementation includes error-handling functionality to gracefully handle various scenarios.
+This is my **first profile search app project** — stepping into API integration by fetching GitHub user data and displaying it in a clean UI.
 
-## Key Features
-- GitHub API Integration: Utilizes GitHub's API to retrieve user details.
-- Error Handling: Implements comprehensive error handling to ensure a smooth user experience and graceful recovery from unexpected situations.
-- Clean Code: The codebase is organized and follows best practices for readability and maintainability.
-<br>
-Feel free to customize the language to better match your specific project and implementation details. ✌🏽
-</br>
-<br>
+---
+
+## 🚀 What It Does
+
+- Takes a GitHub username as input  
+- Calls the **GitHub REST API** to fetch profile details  
+- Displays user info like name, bio, repositories, followers, etc.  
+- Graceful error handling (user not found, network issues, etc.)
+
+---
+
+## 🧠 What I Learned
+
+- How to **call external APIs** (GitHub API)  
+- Handling **async / await** and promises  
+- Working with **JSON responses** and destructuring data  
+- Updating the UI dynamically based on fetched data  
+- Managing **error states and user feedback**
+
+---
+
+## 🧩 Tech Stack
+
+- **React**  
+- **Vite**  
+- **JavaScript / TypeScript**  
+- **GitHub API (REST)**
+
 Using: React + Vite. </br>
 This template provides a minimal setup to get React working in Vite.
